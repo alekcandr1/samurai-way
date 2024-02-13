@@ -1,16 +1,16 @@
-import { sum } from "./01";
+import { split } from "./01";
 
-test('sum should be correct', () => {
+test('split into words should be correct', () => {
     //data
-    const a = 1;
-    const b = 2;
-    const c = 3;
+    const a = "Hello my friends";
+    const b = "JS - is   the best";
 
     //action
-    const result = sum(a, b);
+    const result1 = split(a);
+    const result2 = split(b);
 
     //expected result
-    expect(result).toBe(3);
-
+    expect(result1.length).toBe(3);
+    expect(result2.length).toBe(4);
 
 })

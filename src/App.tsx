@@ -1,19 +1,19 @@
 import React from 'react';
 import './App.css';
-import { split } from "./01"
-
-const text = "Hello my friends"
-const result = split(text);
-console.log(result);
-
-
+import Header from './components/Header';
+import Navbar from './components/Navbar';
+import Footer from './components/Footer';
+import Profile from './components/Profile';
 
 function App() {
-  return (
-    <div>
-
-    </div>
-  );
+    return (
+        <div className="app-wrapper">
+            <Header/>
+            <Navbar/>
+            <Profile />
+            <Footer />
+        </div>
+    );
 }
 
-export default App;
+export default App

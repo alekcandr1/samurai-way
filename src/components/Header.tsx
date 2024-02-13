@@ -1,9 +1,12 @@
-function Header() {
+import React from 'react';
+import logo from '../assets/images/logo.png';
+
+const Header = () => {
     return (
-        <div>
-            <h1>Social network</h1>
-        </div>
-    )
-}
+        <header className="header">
+            <img src={logo} alt=""/>
+        </header>
+    );
+};
 
 export default Header;
