@@ -1,18 +1,17 @@
-import React from 'react';
+import React from 'react'
+import classes from './Profile.module.css'
+import Posts from './posts/Posts';
 
 const Profile = () => {
     return (
-        <main className="content">
+        <main className={ classes.content }>
             <div>
                 Main img
             </div>
             <div>
                 Ava + description
             </div>
-            <div>Mypost</div>
-            <div>New post</div>
-            <div>post 1</div>
-            <div>post 2</div>
+           <Posts />
         </main>
     );
 };

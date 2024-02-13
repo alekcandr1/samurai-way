@@ -1,0 +1,17 @@
+.item {
+    color: #252525;
+    padding: 10px;
+    background-color: aliceblue;
+    margin-bottom: 5px;
+    border-radius: 5px;
+    display: flex;
+    align-items: center;
+    gap: 20px;
+}
+.item img {
+    width: 40px;
+    border-radius: 50px;
+}
+.active {
+    color: #ccc;
+}

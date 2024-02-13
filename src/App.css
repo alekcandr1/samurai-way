@@ -4,24 +4,10 @@
     grid-template-areas:
             "h h"
             "n c";
-    grid-template-rows: 60px 1fr;
+    /*grid-template-rows: 100px 1fr;*/
     grid-template-columns: 2fr 10fr;
     grid-gap: 10px;
 }
-
-.header {
-    background-color: antiquewhite;
-    grid-area: h;
-}
-.header img {
-    height: 50px;
-}
-.nav {
-    background-color: bisque;
-    grid-area: n;
-}
-
-.content {
-    background-color: aquamarine;
-    grid-area: c;
+body {
+    color: #252525;
 }
