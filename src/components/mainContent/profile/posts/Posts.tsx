@@ -7,7 +7,7 @@ const Posts = () => {
     return (
         <>
             <h3>Posts</h3>
-            <NewPost/>
+            <NewPost message={''}/>
             <Post message="Hello, Im Alex Bohon"/>
             <Post message="a web developer"/>
 

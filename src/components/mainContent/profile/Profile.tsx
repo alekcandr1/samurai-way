@@ -4,7 +4,7 @@ import Posts from './posts/Posts';
 
 const Profile = () => {
     return (
-        <main className={ classes.content }>
+        <div>
             <div>
                 Main img
             </div>
@@ -12,7 +12,7 @@ const Profile = () => {
                 Ava + description
             </div>
            <Posts />
-        </main>
+        </div>
     );
 };
 
