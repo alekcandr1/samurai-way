@@ -1,0 +1,21 @@
+
+.friends {
+
+}
+
+.friend {
+
+}
+
+.friendActive {
+    font-weight: bold;
+}
+
+.dialogs {
+     display: grid;
+     grid-template-columns: 2fr 10fr;
+ }
+
+.dialogItem {
+
+}

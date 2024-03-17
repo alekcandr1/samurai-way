@@ -17,6 +17,7 @@ const NewPost = ( props: NewPostType ) => {
             <div>New post:</div>
             <div>
                 <textarea ref={ postMessageRef }></textarea>
+                <br/>
                 <button onClick={ addPost }>Add post</button>
             </div>
         </>
