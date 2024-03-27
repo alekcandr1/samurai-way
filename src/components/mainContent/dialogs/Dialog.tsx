@@ -7,6 +7,7 @@ import { MouseEvent } from 'react';
 type DialogPropsType = {
     id: string,
     name: string,
+    onClick: ( userId: string ) => void
 };
 export const Dialog = ( props: DialogPropsType ) => {
 

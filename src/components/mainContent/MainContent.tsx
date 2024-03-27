@@ -5,18 +5,24 @@ import News from './news/News';
 import Music from './music/Music';
 import Settings from './settings/Settings';
 import classes from './profile/Profile.module.css';
-import { BrowserRouter, Route } from 'react-router-dom';
+import { Route } from 'react-router-dom';
+import { MessagesType, UserType } from '../../redux/state';
 
+type MainContentProps = {
+    posts: Array<string>
+    messages: MessagesType
+    users: UserType[]
+}
 
-const MainContent = () => {
+const MainContent = ( {posts, messages, users}: MainContentProps) => {
     return (
-
             <main className={ classes.content }>
-                <Route exact path={'/profile'} component={ Profile } />
-                <Route exact path={'/dialogs'} component={ Dialogs } />
-                <Route exact path={'/news'} component={ News } />
-                <Route exact path={'/music'} component={ Music } />
-                <Route exact path={'/settings'} component={ Settings } />
+                <Route exact path={'/profile'} render={ ()=> <Profile posts={ posts } /> } />
+                <Route exact path={'/dialogs'} render={ ()=> <Dialogs users={users} messages={messages} /> } />
+                <Route exact path={'/news'} render={ ()=> <News /> } />
+                <Route exact path={'/music'} render={ ()=> <Music /> } />
+                <Route exact path={'/settings'} render={ ()=> <Settings /> } />
+
             </main>
 
     );
