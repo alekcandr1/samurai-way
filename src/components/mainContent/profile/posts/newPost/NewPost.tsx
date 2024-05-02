@@ -1,24 +1,25 @@
 import React from 'react';
+import { postType } from '../../../../../redux/state';
 
 type NewPostType = {
-    message: string
+    addPost: (title: string) => void
+
 }
 
-const NewPost = ( props: NewPostType ) => {
+const NewPost = ( {addPost}: NewPostType ) => {
 
     let postMessageRef = React.createRef<HTMLTextAreaElement>()
-
-    const addPost = () => {
-        alert(postMessageRef.current?.value)
+    let onClickHandler = () => {
+        let newPost = postMessageRef.current?.value
+        newPost && addPost(newPost)
     }
-
     return (
         <>
             <div>New post:</div>
             <div>
                 <textarea ref={ postMessageRef }></textarea>
-                <br/>
-                <button onClick={ addPost }>Add post</button>
+                <br />
+                <button onClick={ onClickHandler }>Add post</button>
             </div>
         </>
     )

@@ -1,15 +1,16 @@
 import React from 'react';
 import classes from './Post.module.css';
 import avatar from '../../../../../assets/images/avatar.jpg'
+import { postType } from '../../../../../redux/state';
 
 type PostPropsType = {
-    message: string
+    post: postType
 }
-const Post = ( {message}: PostPropsType ) => {
+const Post = ( {post}: PostPropsType ) => {
     return (
         <div className={ classes.item }>
             <img src={ avatar } alt=""/>
-            { message }
+            { post.title }
         </div>
     );
 };
