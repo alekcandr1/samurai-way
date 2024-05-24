@@ -6,17 +6,18 @@ import Music from './music/Music';
 import Settings from './settings/Settings';
 import classes from './profile/Profile.module.css';
 import { Route } from 'react-router-dom';
-import { MessagesType, postType, UserType } from '../../redux/state';
+import { MessagesType, PostType, StateType, UserType } from '../../redux/state';
 
 type MainContentProps = {
-    posts: Array<postType>
+    state: StateType
+    posts: Array<PostType>
     messages: MessagesType
     users: UserType[]
-    addPost: (title: string) => void
+    addPost: ( title: string ) => void
 
 }
 
-const MainContent = ( {posts, messages, users, addPost}: MainContentProps ) => {
+const MainContent = ( {posts, messages, users, addPost, state}: MainContentProps ) => {
     return (
         <main className={ classes.content }>
             <Route exact path={ '/profile' } render={ () => <Profile posts={ posts } addPost={ addPost } /> } />

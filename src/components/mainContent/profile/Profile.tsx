@@ -2,10 +2,10 @@ import React from 'react'
 import classes from './Profile.module.css'
 import Posts from './posts/Posts';
 import { ProfileInfo } from './profileInfo/ProfileInfo';
-import { postType } from '../../../redux/state';
+import { PostType } from '../../../redux/state';
 
 type ProfileProps = {
-    posts: Array<postType>
+    posts: Array<PostType>
     addPost: (title: string) => void
 
 }

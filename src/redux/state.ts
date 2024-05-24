@@ -1,8 +1,8 @@
 import { v1 } from 'uuid';
 
-export type stateType = {
+export type StateType = {
     profilePage: {
-        posts: Array<postType>
+        posts: Array<PostType>
     }
     dialogsPage: {
         users: UserType[],
@@ -10,7 +10,7 @@ export type stateType = {
     }
 }
 
-export type postType = {
+export type PostType = {
     id: number,
     title: string
 }
@@ -36,37 +36,52 @@ const id4 = v1()
 const id5 = v1()
 const id6 = v1()
 
-export const state: stateType = {
-    profilePage: {
-        posts: [
-            {id: 1, title: 'Hello, Im Alex Bohon'},
-            {id: 2, title: 'a web developer'},
-        ]
-    },
-    dialogsPage: {
-        users: [
-            {id: id1, name: 'Alex'},
-            {id: id2, name: 'Bob'},
-            {id: id3, name: 'Viktor'},
-            {id: id4, name: 'Andrey'},
-            {id: id5, name: 'Ilya'},
-            {id: id6, name: 'Ann'},
-        ],
-        messages: {
-            [id1]: [
-                {id: '1', title: 'Hi'},
-                {id: '2', title: 'i\'m developer Alex'},
-                {id: '3', title: 'how are you?..'}
+export let store = {
+    _state: {
+        profilePage: {
+            posts: [
+                {id: 1, title: 'Hello, Im Alex Bohon'},
+                {id: 2, title: 'a web developer'},
             ],
-            [id2]: [{id: '1', title: 'i\'m developer Bob'}],
-            [id3]: [{id: '1', title: 'i\'m developer Viktor'}],
-            [id4]: [{id: '1', title: 'i\'m developer Andrey'}],
-            [id5]: [{id: '1', title: 'i\'m developer Ilya'}],
-            [id6]: [{id: '1', title: 'i\'m developer Ann'}],
         },
-    }
+        dialogsPage: {
+            users: [
+                {id: id1, name: 'Alex'},
+                {id: id2, name: 'Bob'},
+                {id: id3, name: 'Viktor'},
+                {id: id4, name: 'Andrey'},
+                {id: id5, name: 'Ilya'},
+                {id: id6, name: 'Ann'},
+            ],
+            messages: {
+                [id1]: [
+                    {id: '1', title: 'Hi'},
+                    {id: '2', title: 'i\'m developer Alex'},
+                    {id: '3', title: 'how are you?..'}
+                ],
+                [id2]: [{id: '1', title: 'i\'m developer Bob'}],
+                [id3]: [{id: '1', title: 'i\'m developer Viktor'}],
+                [id4]: [{id: '1', title: 'i\'m developer Andrey'}],
+                [id5]: [{id: '1', title: 'i\'m developer Ilya'}],
+                [id6]: [{id: '1', title: 'i\'m developer Ann'}],
+            },
+        }
+    },
+    getState() {
+        return this._state
+    },
+    _callSubscriber() {
+        console.log('Subscriber is not exist')
+    },
+    addPost( postTitle: string ) {
+        this._state.profilePage.posts = [...this._state.profilePage.posts, {id: 5, title: postTitle}]
+        this._callSubscriber()
+    },
+    subscribe( observer: any ) {
+        this._callSubscriber = observer
+    },
+
+
 }
 
-export let addPost = (postTitle: string) => {
-    state.profilePage.posts = [...state.profilePage.posts, {id: 5, title: postTitle}]
-}
+export default store

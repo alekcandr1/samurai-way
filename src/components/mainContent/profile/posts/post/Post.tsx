@@ -1,10 +1,10 @@
 import React from 'react';
 import classes from './Post.module.css';
 import avatar from '../../../../../assets/images/avatar.jpg'
-import { postType } from '../../../../../redux/state';
+import { PostType } from '../../../../../redux/state';
 
 type PostPropsType = {
-    post: postType
+    post: PostType
 }
 const Post = ( {post}: PostPropsType ) => {
     return (
