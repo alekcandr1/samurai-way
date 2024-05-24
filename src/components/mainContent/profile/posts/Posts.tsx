@@ -19,8 +19,6 @@ const Posts = ({posts, addPost}: ProfileProps) => {
             <div className={ s.posts }>
                 { posts.map(post => <Post post={ post } />) }
             </div>
-
-
         </>
     )
         ;

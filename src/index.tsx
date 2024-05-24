@@ -4,6 +4,8 @@ import './index.css'
 import App from './App'
 import { addPost, state } from './redux/state'
 
+addPost('HEY')
+
 ReactDOM.render(<App posts={ state.profilePage.posts }
                      users={ state.dialogsPage.users }
                      messages={ state.dialogsPage.messages }
