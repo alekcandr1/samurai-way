@@ -6,15 +6,14 @@ import { PostType } from '../../../redux/state';
 
 type ProfileProps = {
     posts: Array<PostType>
-    addPost: (title: string) => void
-
+    dispatch: ( action: any ) => void
 }
 
-const Profile = ( {posts, addPost}: ProfileProps ) => {
+const Profile = ( {posts, dispatch}: ProfileProps ) => {
     return (
         <div>
             <ProfileInfo />
-            <Posts posts={ posts } addPost={ addPost } />
+            <Posts posts={ posts } dispatch={ dispatch } />
         </div>
     );
 };

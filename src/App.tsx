@@ -9,20 +9,16 @@ import store, { MessagesType, PostType, StateType, UserType } from './redux/stat
 
 type AppProps = {
     state: StateType
-    posts: Array<PostType>
-    messages: MessagesType
-    users: UserType[]
-    addPost: ( title: string ) => void
+    dispatch: ( action: any ) => void
 }
 
-function App( {posts, users, messages, addPost, state}: AppProps ) {
+function App( {state, dispatch}: AppProps ) {
     return (
         <BrowserRouter>
             <div className="app-wrapper">
                 <Header />
                 <Navbar />
-                <MainContent state={ state } posts={ posts } users={ users } messages={ messages }
-                             addPost={ addPost } />
+                <MainContent state={ state } dispatch={ dispatch } />
                 <Footer />
             </div>
         </BrowserRouter>

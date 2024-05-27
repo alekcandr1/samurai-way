@@ -67,21 +67,25 @@ export let store = {
             },
         }
     },
-    getState() {
-        return this._state
-    },
     _callSubscriber() {
         console.log('Subscriber is not exist')
-    },
-    addPost( postTitle: string ) {
-        this._state.profilePage.posts = [...this._state.profilePage.posts, {id: 5, title: postTitle}]
-        this._callSubscriber()
     },
     subscribe( observer: any ) {
         this._callSubscriber = observer
     },
+    dispatch( action: any ) {
+        if (action.type === 'ADD-POST') {
+            this._state.profilePage.posts = [...this._state.profilePage.posts, {id: 5, title: action.postTitle}]
+            this._callSubscriber()
+        } else if (action.type === 'GET-STATE') {
+            return this._state as StateType
+        }
+        return this._state as StateType
+    }
+}
 
-
+export const addPostAC = ( newPost: string ) => {
+    return {type: 'ADD-POST', postTitle: newPost} as const
 }
 
 export default store

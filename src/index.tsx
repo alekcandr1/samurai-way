@@ -6,12 +6,8 @@ import store from './redux/state'
 
 export const rerenderEntireTree = () => {
     console.log('render App')
-    ReactDOM.render(<App state={ store.getState() }
-                         posts={ store.getState().profilePage.posts }
-                         users={ store._state.dialogsPage.users }
-                         messages={ store._state.dialogsPage.messages }
-                         addPost={ store.addPost.bind(store) }
-
+    ReactDOM.render(<App state={ store.dispatch({type: 'GET-STATE'}) }
+                         dispatch={ store.dispatch.bind(store) }
     />, document.getElementById('root'));
 };
 

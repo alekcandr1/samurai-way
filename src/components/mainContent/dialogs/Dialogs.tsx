@@ -4,7 +4,6 @@ import { Dialog } from './Dialog';
 import { MessagesType, UserType } from '../../../redux/state';
 import { Route } from 'react-router-dom';
 
-
 type DialogsPropsType = {
     messages: MessagesType
     users: UserType[]
@@ -12,10 +11,10 @@ type DialogsPropsType = {
 
 const Dialogs = ( {users, messages}: DialogsPropsType ) => {
     const [currentUserId, setCurrentUserId] = useState(users[0].id)
-
     const onClickHandler = ( userId: string ) => {
         setCurrentUserId(userId)
     }
+
     return (
         <div>
             <h3>Dialogs</h3>
@@ -28,39 +27,19 @@ const Dialogs = ( {users, messages}: DialogsPropsType ) => {
                     }) }
                 </div>
                 <div className={ s.messages }>
-
                     {
                         <Route path={ '/dialogs/' + currentUserId } render={ () => {
-                            return messages[currentUserId].map(( mes, index ) => {
+                            return messages[currentUserId].map(( mes ) => {
 
                                 return <div key={ mes.id } className={ s.messageItem }>{ mes.title }</div>
                             })
                         }
                         } />
-                        // users.map(( user, index ) => user.id === currentUserId
-                        //     ? (
-                        //         <div key={ index }>
-                        //             { messages[user.id] && messages[user.id].map(mes => {
-                        //                 return (
-                        //                     <Route path={ '/' + mes.id } render={ () => {
-                        //                         return <div key={ mes.id }
-                        //                                     className={ s.messageItem }>{ mes.title }</div>
-                        //                     } }
-                        //                     />
-                        //                     // <div key={ mes.id } className={ s.messageItem }>{ mes.title }</div>
-                        //                 )
-                        //             }) }
-                        //         </div>
-                        //     )
-                        //     : 'OK '
-                        // )
                     }
-
                 </div>
             </div>
         </div>
     )
-        ;
 };
 
 export default Dialogs;

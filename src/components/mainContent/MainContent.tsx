@@ -10,18 +10,16 @@ import { MessagesType, PostType, StateType, UserType } from '../../redux/state';
 
 type MainContentProps = {
     state: StateType
-    posts: Array<PostType>
-    messages: MessagesType
-    users: UserType[]
-    addPost: ( title: string ) => void
-
+    dispatch: ( action: any ) => void
 }
 
-const MainContent = ( {posts, messages, users, addPost, state}: MainContentProps ) => {
+const MainContent = ( {state, dispatch}: MainContentProps ) => {
     return (
         <main className={ classes.content }>
-            <Route exact path={ '/profile' } render={ () => <Profile posts={ posts } addPost={ addPost } /> } />
-            <Route exact path={ '/dialogs' } render={ () => <Dialogs users={ users } messages={ messages } /> } />
+            <Route exact path={ '/profile' }
+                   render={ () => <Profile posts={ state.profilePage.posts } dispatch={ dispatch } /> } />
+            <Route exact path={ '/dialogs' } render={ () => <Dialogs users={ state.dialogsPage.users }
+                                                                     messages={ state.dialogsPage.messages } /> } />
             <Route exact path={ '/news' } render={ () => <News /> } />
             <Route exact path={ '/music' } render={ () => <Music /> } />
             <Route exact path={ '/settings' } render={ () => <Settings /> } />
