@@ -2,11 +2,11 @@ import React from 'react'
 import Post from './post/Post';
 import NewPost from './newPost/NewPost';
 import s from './Posts.module.css'
-import { PostType } from '../../../../redux/state';
+import { ActionsType, PostType } from '../../../../redux/state';
 
 type ProfileProps = {
     posts: Array<PostType>
-    dispatch: ( action: any ) => void
+    dispatch: ( action: ActionsType ) => void
 }
 
 const Posts = ( {posts, dispatch}: ProfileProps ) => {

@@ -1,14 +1,16 @@
-import React, { ChangeEvent, KeyboardEvent, useState } from 'react';
-import { addPostAC } from '../../../../../redux/state';
+import React, { useRef, useState } from 'react';
+import { ActionsType, addPostAC } from '../../../../../redux/state';
+import Textarea from '../../../../Textarea';
+import { Button } from '../../../../Button';
 
 type NewPostType = {
-    dispatch: ( action: any ) => void
+    dispatch: ( action: ActionsType ) => void
 }
 
 const NewPost = ( {dispatch}: NewPostType ) => {
     const [title, setTitle] = useState<string>('')
 
-    let postMessageRef = React.createRef<HTMLTextAreaElement>()
+    let postMessageRef = useRef<HTMLTextAreaElement>(null);
     const addPost = () => {
         let newPost = postMessageRef.current?.value
         newPost && dispatch(addPostAC(newPost))
@@ -17,25 +19,22 @@ const NewPost = ( {dispatch}: NewPostType ) => {
     let onClickHandler = () => {
         addPost()
     }
-    let onKeyHandler = ( e: KeyboardEvent<HTMLTextAreaElement> ) => {
-        e.key === 'Enter' && addPost()
+    const onChangeHandler = () => {
+        let currentTextarea = postMessageRef.current?.value
+        currentTextarea && setTitle(currentTextarea)
     }
-    let onChangeHandler = ( e: ChangeEvent<HTMLTextAreaElement> ) => {
-        setTitle(e.currentTarget.value)
-    }
+
 
     return (
         <>
             <div>New post:</div>
             <div>
-                <textarea ref={ postMessageRef } value={ title }
-                          onChange={ onChangeHandler }
-                          onKeyUp={ onKeyHandler }></textarea>
-                <br />
-                <button onClick={ onClickHandler }>Add post</button>
+                <Textarea value={ title } ref={ postMessageRef } onChange={ onChangeHandler } />
+                <Button title={ 'Add post' } onClick={ onClickHandler } />
             </div>
         </>
     )
 }
+
 
 export default NewPost;

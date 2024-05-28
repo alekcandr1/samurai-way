@@ -9,15 +9,17 @@ type DialogPropsType = {
     name: string,
     onClick: ( userId: string ) => void
 };
-export const Dialog = ( props: DialogPropsType ) => {
+export const Dialog = ( {id, name, onClick}: DialogPropsType ) => {
 
     const onClickHandler = ( e: MouseEvent<HTMLDivElement> ) => {
+        onClick(id)
         // e.currentTarget.className = s.friend + ' ' + s.friendActive
+
     }
 
     return (
         <div className={ s.friend } onClick={ onClickHandler }>
-            <NavLink to={ '/dialogs/' + props.id }>{ props.name }</NavLink>
+            <NavLink to={ '/dialogs/' + id }>{ name }</NavLink>
         </div>
 
     );

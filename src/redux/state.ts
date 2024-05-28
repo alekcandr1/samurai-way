@@ -40,17 +40,20 @@ export type StoreType = {
     _state: StateType
     _callSubscriber: () => void
     subscribe: ( observer: () => void ) => void
-    dispatch: ( action: ActionsType) => any
+    dispatch: ( action: ActionsType ) => any
     getState: () => StateType
     addPost: ( postTitle: string ) => void
+    addMessage: ( userID: string, newMessage: string ) => void
 }
 
 export type ActionsType =
     | addPostType
     | getStateACType
+    | addMessageACType
 
 type addPostType = ReturnType<typeof addPostAC>
 type getStateACType = ReturnType<typeof getStateAC>
+type addMessageACType = ReturnType<typeof addMessageAC>
 
 
 export const addPostAC = ( newPost: string ) => {
@@ -58,6 +61,9 @@ export const addPostAC = ( newPost: string ) => {
 }
 export const getStateAC = () => {
     return {type: 'GET-STATE'} as const
+}
+export const addMessageAC = ( userID: string, newMessage: string ) => {
+    return {type: 'ADD-MESSAGE', userID: userID, newMessage: newMessage} as const
 }
 
 export let store: StoreType = {
@@ -104,13 +110,24 @@ export let store: StoreType = {
         this._state.profilePage.posts = [...this._state.profilePage.posts, {id: 5, title: postTitle}]
         this._callSubscriber()
     },
+    addMessage( userID: string, newMessage: string ) {
+        this._state.dialogsPage.messages = {
+            ...this._state.dialogsPage.messages,
+            [userID]:
+                [...this._state.dialogsPage.messages[userID], {id: '123', title: newMessage}]
+        }
+        this._callSubscriber()
+    },
     dispatch( action ) {
         if (action.type === 'ADD-POST') {
             return this.addPost(action.postTitle)
         } else if (action.type === 'GET-STATE') {
             return this.getState()
+        } else if (action.type === 'ADD-MESSAGE') {
+            return this.addMessage(action.userID, action.newMessage)
         }
         return this._state as StateType
+
     }
 }
 
