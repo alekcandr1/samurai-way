@@ -1,9 +1,10 @@
 import { v1 } from 'uuid';
+import profileReducer from './profile-reducer';
 
 export type StateType = {
     profilePage: {
-        posts: Array<PostType>
-    }
+        posts: PostType[]
+    },
     dialogsPage: {
         users: UserType[],
         messages: MessagesType
@@ -26,7 +27,7 @@ export type MessageType = {
 }
 
 export type MessagesType = {
-    [key: string]: Array<MessageType>
+    [key: string]: MessageType[]
 }
 
 const id1 = v1()
@@ -42,8 +43,6 @@ export type StoreType = {
     subscribe: ( observer: () => void ) => void
     dispatch: ( action: ActionsType ) => any
     getState: () => StateType
-    addPost: ( postTitle: string ) => void
-    addMessage: ( userID: string, newMessage: string ) => void
 }
 
 export type ActionsType =
@@ -106,30 +105,23 @@ export let store: StoreType = {
     getState() {
         return this._state
     },
-    addPost( postTitle: string ) {
-        this._state.profilePage.posts = [...this._state.profilePage.posts, {id: 5, title: postTitle}]
-        this._callSubscriber()
-    },
-    addMessage( userID: string, newMessage: string ) {
-        this._state.dialogsPage.messages = {
-            ...this._state.dialogsPage.messages,
-            [userID]:
-                [...this._state.dialogsPage.messages[userID], {id: '123', title: newMessage}]
-        }
-        this._callSubscriber()
-    },
     dispatch( action ) {
-        if (action.type === 'ADD-POST') {
-            return this.addPost(action.postTitle)
-        } else if (action.type === 'GET-STATE') {
-            return this.getState()
-        } else if (action.type === 'ADD-MESSAGE') {
-            return this.addMessage(action.userID, action.newMessage)
-        }
-        return this._state as StateType
+        this._state = profileReducer(this._state, action)
+        this._callSubscriber()
 
+
+        // this._state = profileReducer(this._state, action)
+
+        //     if (action.type === 'ADD-POST') {
+        //         return this.addPost(action.postTitle)
+        //     } else if (action.type === 'GET-STATE') {
+        //         return this.getState()
+        //     } else if (action.type === 'ADD-MESSAGE') {
+        //         return this.addMessage(action.userID, action.newMessage)
+        //     }
+        //     return this._state as StateType
+        // }
     }
 }
-
 
 export default store

@@ -6,7 +6,7 @@ import store from './redux/state'
 
 export const rerenderEntireTree = () => {
     console.log('render App')
-    ReactDOM.render(<App state={ store.dispatch({type: 'GET-STATE'})}
+    ReactDOM.render(<App state={ store.getState() }
                          dispatch={ store.dispatch.bind(store) }
     />, document.getElementById('root'));
 };
