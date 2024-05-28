@@ -36,7 +36,31 @@ const id4 = v1()
 const id5 = v1()
 const id6 = v1()
 
-export let store = {
+export type StoreType = {
+    _state: StateType
+    _callSubscriber: () => void
+    subscribe: ( observer: () => void ) => void
+    dispatch: ( action: ActionsType) => any
+    getState: () => StateType
+    addPost: ( postTitle: string ) => void
+}
+
+export type ActionsType =
+    | addPostType
+    | getStateACType
+
+type addPostType = ReturnType<typeof addPostAC>
+type getStateACType = ReturnType<typeof getStateAC>
+
+
+export const addPostAC = ( newPost: string ) => {
+    return {type: 'ADD-POST', postTitle: newPost} as const
+}
+export const getStateAC = () => {
+    return {type: 'GET-STATE'} as const
+}
+
+export let store: StoreType = {
     _state: {
         profilePage: {
             posts: [
@@ -70,22 +94,25 @@ export let store = {
     _callSubscriber() {
         console.log('Subscriber is not exist')
     },
-    subscribe( observer: any ) {
+    subscribe( observer ) {
         this._callSubscriber = observer
     },
-    dispatch( action: any ) {
+    getState() {
+        return this._state
+    },
+    addPost( postTitle: string ) {
+        this._state.profilePage.posts = [...this._state.profilePage.posts, {id: 5, title: postTitle}]
+        this._callSubscriber()
+    },
+    dispatch( action ) {
         if (action.type === 'ADD-POST') {
-            this._state.profilePage.posts = [...this._state.profilePage.posts, {id: 5, title: action.postTitle}]
-            this._callSubscriber()
+            return this.addPost(action.postTitle)
         } else if (action.type === 'GET-STATE') {
-            return this._state as StateType
+            return this.getState()
         }
         return this._state as StateType
     }
 }
 
-export const addPostAC = ( newPost: string ) => {
-    return {type: 'ADD-POST', postTitle: newPost} as const
-}
 
 export default store
