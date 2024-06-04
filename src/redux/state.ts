@@ -88,7 +88,10 @@ export let store: StoreType = {
                     {id: '2', title: 'i\'m developer Alex'},
                     {id: '3', title: 'how are you?..'}
                 ],
-                [id2]: [{id: '1', title: 'i\'m developer Bob'}],
+                [id2]: [
+                    {id: '1', title: 'i\'m developer Bob'},
+                    {id: '2', title: 'how are you?..'}
+                ],
                 [id3]: [{id: '1', title: 'i\'m developer Viktor'}],
                 [id4]: [{id: '1', title: 'i\'m developer Andrey'}],
                 [id5]: [{id: '1', title: 'i\'m developer Ilya'}],
@@ -108,19 +111,6 @@ export let store: StoreType = {
     dispatch( action ) {
         this._state = profileReducer(this._state, action)
         this._callSubscriber()
-
-
-        // this._state = profileReducer(this._state, action)
-
-        //     if (action.type === 'ADD-POST') {
-        //         return this.addPost(action.postTitle)
-        //     } else if (action.type === 'GET-STATE') {
-        //         return this.getState()
-        //     } else if (action.type === 'ADD-MESSAGE') {
-        //         return this.addMessage(action.userID, action.newMessage)
-        //     }
-        //     return this._state as StateType
-        // }
     }
 }
 
