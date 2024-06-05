@@ -1,14 +1,17 @@
 import { v1 } from 'uuid';
 import profileReducer from './profile-reducer';
 
+export type ProfilePageType = {
+    posts: PostType[]
+}
+export type DialogsPageType = {
+    users: UserType[],
+    messages: MessagesType
+}
+
 export type StateType = {
-    profilePage: {
-        posts: PostType[]
-    },
-    dialogsPage: {
-        users: UserType[],
-        messages: MessagesType
-    }
+    profilePage: ProfilePageType,
+    dialogsPage: DialogsPageType
 }
 
 export type PostType = {
@@ -109,7 +112,7 @@ export let store: StoreType = {
         return this._state
     },
     dispatch( action ) {
-        this._state = profileReducer(this._state, action)
+        // this._state = profileReducer(this._state, action)
         this._callSubscriber()
     }
 }

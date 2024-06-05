@@ -1,4 +1,11 @@
-import type { ActionsType, StateType } from './state';
+import { ProfilePageType } from './redux-store';
+
+export type ProfilePageActionsType =
+    | addPostType
+    | getStateACType
+
+type addPostType = ReturnType<typeof addPostAC>
+type getStateACType = ReturnType<typeof getStateAC>
 
 export const addPostAC = ( newPost: string ) => {
     return {type: 'ADD-POST', postTitle: newPost} as const
@@ -6,28 +13,21 @@ export const addPostAC = ( newPost: string ) => {
 export const getStateAC = () => {
     return {type: 'GET-STATE'} as const
 }
-export const addMessageAC = ( userID: string, newMessage: string ) => {
-    return {type: 'ADD-MESSAGE', userID: userID, newMessage: newMessage} as const
+
+let initialState: ProfilePageType = {
+    posts: [
+        {id: 1, title: 'Hello, Im Alex Bohon'},
+        {id: 2, title: 'a web developer'},
+    ],
 }
 
-export const profileReducer = ( state: StateType, action: ActionsType ) => {
+export const profileReducer = ( state: ProfilePageType = initialState, action: ProfilePageActionsType ) => {
     switch (action.type) {
         case 'ADD-POST':
-            return {
-                ...state,
-                profilePage: {
-                    ...state.profilePage,
-                    posts: [...state.profilePage.posts, {id: 123, title: action.postTitle}]
+            return  {
+                    ...state,
+                    posts: [...state.posts, {id: 123, title: action.postTitle}]
                 }
-            };
-        case 'ADD-MESSAGE':
-            return {
-                ...state,
-                dialogsPage: {
-                    ...state.dialogsPage,
-                    messages: {...state.dialogsPage.messages, [action.userID]: [...state.dialogsPage.messages[action.userID], {id: '123', title: action.newMessage}]}
-                }
-            };
         default:
             return state
     }

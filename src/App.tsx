@@ -5,20 +5,17 @@ import Navbar from './components/navbar/Navbar';
 import Footer from './components/footer/Footer';
 import MainContent from './components/mainContent/MainContent';
 import { BrowserRouter } from 'react-router-dom'
-import store, { ActionsType, StateType } from './redux/state';
 
-type AppProps = {
-    state: StateType
-    dispatch: ( action: ActionsType ) => void
-}
+type AppProps = {}
 
-function App( {state, dispatch}: AppProps ) {
+function App( props: AppProps ) {
+
     return (
         <BrowserRouter>
             <div className="app-wrapper">
                 <Header />
                 <Navbar />
-                <MainContent state={ state } dispatch={ dispatch } />
+                <MainContent />
                 <Footer />
             </div>
         </BrowserRouter>

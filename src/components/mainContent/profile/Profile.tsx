@@ -2,18 +2,15 @@ import React from 'react'
 import classes from './Profile.module.css'
 import Posts from './posts/Posts';
 import { ProfileInfo } from './profileInfo/ProfileInfo';
-import { ActionsType, PostType } from '../../../redux/state';
+import PostsContainer from './posts/PostsContainer';
 
-type ProfileProps = {
-    posts: Array<PostType>
-    dispatch: ( action: ActionsType ) => void
-}
+type ProfileProps = {}
 
-const Profile = ( {posts, dispatch}: ProfileProps ) => {
+const Profile = ( props: ProfileProps ) => {
     return (
         <div>
             <ProfileInfo />
-            <Posts posts={ posts } dispatch={ dispatch } />
+            <PostsContainer />
         </div>
     );
 };

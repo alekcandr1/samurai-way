@@ -2,20 +2,22 @@ import React from 'react'
 import Post from './post/Post';
 import NewPost from './newPost/NewPost';
 import s from './Posts.module.css'
-import { ActionsType, PostType } from '../../../../redux/state';
+import { useDispatch, useSelector } from 'react-redux';
+import { AppRootStateType, ProfilePageType } from '../../../../redux/redux-store';
 
 type ProfileProps = {
-    posts: Array<PostType>
-    dispatch: ( action: ActionsType ) => void
+    state: ProfilePageType
+    onAddPost: (newPost: string) => void
 }
 
-const Posts = ( {posts, dispatch}: ProfileProps ) => {
+const Posts = ( {onAddPost, state}: ProfileProps ) => {
+
     return (
         <>
             <h3>Posts</h3>
-            <NewPost dispatch={ dispatch } />
+            <NewPost onAddPost={ onAddPost } />
             <div className={ s.posts }>
-                { posts.map(( post, index ) => <Post key={ index } post={ post } />) }
+                { state.posts.map(( post, index ) => <Post key={ index } post={ post } />) }
             </div>
         </>
     )

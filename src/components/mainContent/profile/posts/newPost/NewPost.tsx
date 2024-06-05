@@ -1,19 +1,19 @@
 import React, { useRef, useState } from 'react';
-import { ActionsType, addPostAC } from '../../../../../redux/state';
 import Textarea from '../../../../Textarea';
 import { Button } from '../../../../Button';
+import { addPostAC, ProfilePageActionsType } from '../../../../../redux/profile-reducer';
 
 type NewPostType = {
-    dispatch: ( action: ActionsType ) => void
+    onAddPost: (newPost: string) => void
 }
 
-const NewPost = ( {dispatch}: NewPostType ) => {
+const NewPost = ( {onAddPost}: NewPostType ) => {
     const [title, setTitle] = useState<string>('')
 
     let postMessageRef = useRef<HTMLTextAreaElement>(null);
     const addPost = () => {
         let newPost = postMessageRef.current?.value
-        newPost && dispatch(addPostAC(newPost))
+        newPost && onAddPost(newPost)
         setTitle('')
     }
     let onClickHandler = () => {
@@ -23,7 +23,6 @@ const NewPost = ( {dispatch}: NewPostType ) => {
         let currentTextarea = postMessageRef.current?.value
         currentTextarea && setTitle(currentTextarea)
     }
-
 
     return (
         <>
